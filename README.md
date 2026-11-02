@@ -77,8 +77,19 @@ ollama pull llama3.2:3b
 
 > Note: OpenAI/HuggingFace API keys are only needed if using those LLM/embedding options instead of the local Ollama + HuggingFace-embeddings setup used by default.
 
-Place the corpus and benchmark files under `rag_legal/` (see Dataset section above) before running the notebook.
+The repository stores the corpus and benchmark inputs in `rag_legal.zip`, rather than as expanded folders. Extract the archive before running the notebook:
 
+```bash
+unzip rag_legal.zip -d .
+```
+
+Confirm that the extracted structure contains `rag_legal/corpus/` and `rag_legal/benchmarks/`. If the archive creates an additional nested folder, move or configure the extracted directory so the notebook's expected `rag_legal/` paths resolve. The notebook cannot load the corpus until these files are available.
+
+## Reproducibility notes
+
+- The repository includes the archive, notebook, README, and dependency file; the persistent Chroma index is generated during execution rather than checked in.
+- Ragas evaluation is run on a sampled subset because local CPU inference makes the multi-call evaluation expensive. Treat reported metrics as sample-based results, not a full-corpus guarantee.
+- Record the evaluated question count and exact model/runtime configuration alongside future metric updates.
 ## Notebook
 
 See [`RAG_Legal_Docs_Piyush_Sharma.ipynb`](./RAG_Legal_Docs_Piyush_Sharma.ipynb) for the full implementation, analysis, and results.
